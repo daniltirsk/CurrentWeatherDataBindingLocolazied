@@ -14,89 +14,68 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#42545C"
         tools:context=".MainActivity">
 
         <EditText
-            android:id="@+id/input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter the name of the city"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/city"
+            android:id="@+id/cityInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="City"
-            android:text="@{weather.city}"
-            android:textAlignment="center"
-            android:textSize="22dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input" />
-
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Temp"
-            android:text="@{Float.toString(weather.temp)}"
-            android:textSize="22dp"
-            app:layout_constraintBottom_toBottomOf="@+id/typeImg"
-            app:layout_constraintEnd_toStartOf="@+id/typeImg"
-            app:layout_constraintTop_toBottomOf="@+id/input" />
-
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="26dp"
-            android:hint="Type"
-            android:text="@{weather.type}"
-            android:textSize="22dp"
-            app:layout_constraintBottom_toBottomOf="@+id/temp"
-            app:layout_constraintEnd_toStartOf="@+id/temp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input" />
-
-        <ImageView
-            android:id="@+id/windDir"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="85dp"
-            app:imageResource="@{weather.wDirImg}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input" />
-
-        <ImageView
-            android:id="@+id/typeImg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="12dp"
-            app:imageResource="@{weather.typeImg}"
-            app:layout_constraintBottom_toBottomOf="@+id/windDir"
-            app:layout_constraintEnd_toStartOf="@+id/windDir"
-            app:layout_constraintTop_toBottomOf="@+id/input" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="Enter the name of the city"
+            android:singleLine="false"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.65"
+            android:backgroundTint="@android:color/holo_red_light"
+            />
 
         <Button
             android:id="@+id/displayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="132dp"
-            android:onClick="onClick"
-            android:text="SHOW"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:onClick="addCity"
+            android:text="ADD"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@id/cityInput"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+        <FrameLayout
+            android:layout_margin="20dp"
+            android:id="@+id/container_fragm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/input"
+            ></FrameLayout>
+
+        <!--        <Button-->
+        <!--            android:id="@+id/displayBtn"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="250dp"-->
+        <!--            android:onClick="onClick"-->
+        <!--            android:text="SHOW"-->
+        <!--            app:layout_constraintHorizontal_bias="0.498"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintRight_toRightOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/input" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

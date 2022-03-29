@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="com.example.currentweatherdatabinding.Weather" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white"
+        tools:context=".DetailedWeather">
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Temperature: "
+            android:text='@{"Current temperature: " + Float.toString(weather.temp)}'
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Type: "
+            android:text='@{"Type: " + weather.type}'
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/wSpeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="@id/temp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temp" />
+
+        <TextView
+            android:id="@+id/wSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Wind Speed: "
+            android:text='@{"Wind speed: " + Float.toString(weather.wSpeed)}'
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/wDir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="@id/type"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type" />
+
+        <TextView
+            android:id="@+id/wDir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Wind direction (deg) : "
+            android:text='@{"Wind direction (deg): " + Float.toString(weather.wDir)}'
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="@id/wSpeed"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wSpeed" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

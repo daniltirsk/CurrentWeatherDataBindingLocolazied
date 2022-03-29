@@ -3,51 +3,93 @@ package com.example.currentweatherdatabinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.databinding.DataBindingUtil
-import com.example.currentweatherdatabinding.databinding.ActivityMainBinding
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
+import com.example.alertdialogdemo.MyDialog
+import com.example.currentweatherdatabinding.databinding.DetailedWeatherBinding
+import com.example.currentweatherdatabinding.databinding.SimpleWeatherBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.InputStream
 import java.net.URL
 import java.util.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import com.google.gson.Gson
 import com.google.gson.JsonParser
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    lateinit var fm: FragmentManager
+    lateinit var ft: FragmentTransaction
+    lateinit var Detailed: Fragment
+    lateinit var Simple: Fragment
+    lateinit var cities: MutableList<String>
+    public lateinit var weather: Weather
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.displayBtn).setOnClickListener {
-            onClick(it)
+
+        fm = supportFragmentManager
+        ft = fm.beginTransaction()
+        Detailed = DetailedWeather()
+        Simple = SimpleWeather()
+
+        weather = Weather("No city", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
+
+
+        MyDialog(this).show(supportFragmentManager, "choice")
+
+        val rv = findViewById<RecyclerView>(R.id.input)
+        val cityAdapter = CityAdapter(LayoutInflater.from(this))
+        // добавляем данные в список для отображения
+
+
+        cities = mutableListOf();
+        for (city in getResources().getStringArray(R.array.cities)){
+            cities.add(city);
+        }
+        cityAdapter.submitList(cities);
+
+        rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv.adapter = cityAdapter
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(rv)
+
+        snapHelper.getSnapPosition(rv)
+
+
+        rv.attachSnapHelperWithListener(snapHelper,
+            SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE
+        ) { position ->
+            updateWeatherDisplay(cities[position])
         }
 
+        updateWeatherDisplay(cities[0])
 
-        binding  = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.weather = Weather("Not Stated", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
     }
-    suspend fun loadWeather() {
+    fun loadWeather(city: String): Weather {
 
         val API_KEY = resources.getString(R.string.API_KEY)
-        var city = findViewById<EditText>(R.id.input).text.toString()
         val weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric";
-
+        var newWeather: Weather
         val stream: InputStream
 
         try {
             stream = URL(weatherURL).getContent() as InputStream
         } catch (e: Exception){
-            binding.weather = Weather("Something went wrong", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
-            return
+            newWeather = Weather("Something went wrong", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
+            return newWeather
         }
 
 
@@ -78,15 +120,38 @@ class MainActivity : AppCompatActivity() {
             3 -> wDirImg = R.drawable.west
         }
 
-        var newWeather = Weather(city, temp, type, wSpeed, wDir, typeImg, wDirImg)
+        newWeather = Weather(city, temp, type, wSpeed, wDir, typeImg, wDirImg)
 
-        binding.weather = newWeather
-
+        return newWeather
     }
-    public fun onClick(v: View) {
+    public fun updateWeatherDisplay(city:String) {
         // Используем IO-диспетчер вместо Main (основного потока)
         GlobalScope.launch (Dispatchers.IO) {
-            loadWeather()
+            weather = loadWeather(city)
+
+            ft = fm.beginTransaction()
+            if (Simple.isAdded){
+                Simple = SimpleWeather()
+                ft.replace(R.id.container_fragm, Simple)
+                ft.commit()
+            }
+            if (Detailed.isAdded){
+                Detailed = DetailedWeather()
+                ft.replace(R.id.container_fragm, Detailed)
+                ft.commit()
+            }
         }
+    }
+
+    fun addCity(v: View){
+        var cityName = findViewById<TextView>(R.id.cityInput).text.toString().replaceFirstChar { c->c.uppercase() }
+
+        val rv = findViewById<RecyclerView>(R.id.input)
+        val cityAdapter = CityAdapter(LayoutInflater.from(this))
+
+        cities.add(0, cityName);
+        cityAdapter.submitList(cities);
+        rv.adapter = cityAdapter
+        updateWeatherDisplay(cities[0])
     }
 }

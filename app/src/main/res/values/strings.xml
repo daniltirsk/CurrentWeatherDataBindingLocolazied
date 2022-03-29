@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">CurrentWeatherDataBinding</string>
     <string name="API_KEY">d6843ab8ee963f5d372296dfff62aed7</string>
+    <string-array name="weather_types">
+        <item>Text</item>
+        <item>Icon</item>
+    </string-array>
+    <string-array name="cities">
+        <item>Irkutsk</item>
+        <item>Angarsk</item>
+        <item>Svirsk</item>
+        <item>New York</item>
+        <item>Tokyo</item>
+    </string-array>
 </resources>
