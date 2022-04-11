@@ -17,33 +17,41 @@
         android:background="#42545C"
         tools:context=".MainActivity">
 
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:titleTextColor="@color/white"
+            android:background="@android:color/holo_red_light"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/cityInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:hint="Enter the name of the city"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:hint="@string/city_prompt"
             android:singleLine="false"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/displayBtn"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.65"
-            android:backgroundTint="@android:color/holo_red_light"
-            />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintWidth_percent="0.60" />
 
         <Button
             android:id="@+id/displayBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:backgroundTint="@android:color/holo_red_light"
             android:onClick="addCity"
-            android:text="ADD"
+            android:text="@string/add"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -62,20 +70,7 @@
             android:id="@+id/container_fragm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/input"
-            ></FrameLayout>
-
-        <!--        <Button-->
-        <!--            android:id="@+id/displayBtn"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="250dp"-->
-        <!--            android:onClick="onClick"-->
-        <!--            android:text="SHOW"-->
-        <!--            app:layout_constraintHorizontal_bias="0.498"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/input" />-->
+            app:layout_constraintTop_toBottomOf="@id/input" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

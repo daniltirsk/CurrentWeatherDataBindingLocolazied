@@ -23,10 +23,11 @@ class DetailedWeather: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.detailed_weather, container, false)
         view.setBackgroundColor(Color.RED)
         bindingDetailed  = DetailedWeatherBinding.inflate(inflater, container, false)
-        bindingDetailed.weather = (this.activity as MainActivity?)?.weather ?: Weather("No city", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
+        bindingDetailed.weather = (this.activity as MainActivity?)?.weather ?: Weather("No city", 0f,getString(R.string.weather_clear),0f,0,R.drawable.sun,R.drawable.north)
 
 
 //        button = this.requireActivity().findViewById(R.id.displayBtn)

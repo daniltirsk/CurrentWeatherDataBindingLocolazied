@@ -17,7 +17,7 @@ class MyDialog(val ctx: Context): DialogFragment() {
         var choice = 0
         return ctx.let {
             val builder = AlertDialog.Builder(it)
-            builder.setTitle("Choose display type")
+            builder.setTitle(R.string.display_type)
             builder.setSingleChoiceItems(ctx.resources.getStringArray(R.array.weather_types),
                 0
             ) { _, which -> choice = which }

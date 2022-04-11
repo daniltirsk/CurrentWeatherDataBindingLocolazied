@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.currentweatherdatabinding.databinding.SimpleWeatherBinding
+import java.util.*
 
 class SimpleWeather: Fragment() {
     lateinit var bindingSimple: SimpleWeatherBinding
@@ -19,11 +20,13 @@ class SimpleWeather: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val locale: Locale = resources.configuration.locale
+
         val view = inflater.inflate(R.layout.simple_weather, container, false)
         view.setBackgroundColor(Color.BLUE)
         bindingSimple  = SimpleWeatherBinding.inflate(inflater, container, false)
 
-        bindingSimple.weather = (this.activity as MainActivity?)?.weather ?: Weather("No city", 0f,"Clear",0f,0,R.drawable.sun,R.drawable.north)
+        bindingSimple.weather = (this.activity as MainActivity?)?.weather ?: Weather("No city", 0f,getString(R.string.weather_clear),0f,0,R.drawable.sun,R.drawable.north)
 
 //        button = this.requireActivity().findViewById(R.id.displayBtn)
 //        button.setOnClickListener{

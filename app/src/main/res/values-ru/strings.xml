@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ПогодаПриложение</string>
+    <string name="API_KEY">d6843ab8ee963f5d372296dfff62aed7</string>
+    <string name="city_prompt">Введите название города</string>
+    <string name="add">Добавить</string>
+    <string name="temperature">Температура: %s</string>
+    <string name="type">Тип: %s</string>
+    <string name="wind_speed">Скорость ветра: %s</string>
+    <string name="wind_direction_deg">Направление ветра (градусы): %s</string>
+    <string name="weather_clear">Солнечно</string>
+    <string name="weather_clouds">Облачно</string>
+    <string name="weather_rain">Дождь</string>
+    <string name="weather_snow">Снег</string>
+    <string name="display_type">Выберете способ отображения</string>
+    <string-array name="weather_types">
+        <item>Текст</item>
+        <item>Иконки</item>
+    </string-array>
+    <string-array name="cities">
+        <item>Иркутск</item>
+        <item>Ангарск</item>
+        <item>Свирск</item>
+        <item>Нью-Йорк</item>
+        <item>Токио</item>
+    </string-array>
+</resources>

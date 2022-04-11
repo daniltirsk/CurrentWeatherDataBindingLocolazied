@@ -21,8 +21,8 @@
             android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Temperature: "
-            android:text='@{"Current temperature: " + Float.toString(weather.temp)}'
+            android:hint="@string/temperature"
+            android:text='@{@string/temperature(Float.toString(weather.temp))}'
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/type"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +34,8 @@
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Type: "
-            android:text='@{"Type: " + weather.type}'
+            android:hint="@string/type"
+            android:text='@{@string/type(weather.type)}'
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/wSpeed"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +49,8 @@
             android:id="@+id/wSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Wind Speed: "
-            android:text='@{"Wind speed: " + Float.toString(weather.wSpeed)}'
+            android:hint="@string/wind_speed"
+            android:text='@{@string/wind_speed(Float.toString(weather.wSpeed))}'
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/wDir"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +64,8 @@
             android:id="@+id/wDir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Wind direction (deg) : "
-            android:text='@{"Wind direction (deg): " + Float.toString(weather.wDir)}'
+            android:hint="@string/wind_direction_deg"
+            android:text='@{@string/wind_direction_deg(Float.toString(weather.wDir))}'
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
